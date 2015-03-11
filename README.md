@@ -1,2 +1,2 @@
 # ember-pardon
-Gives Ember Views a single Get Out Of Jail Free card.  EmberPardon adds a 'beforeDestroy' hook that allows the view to be saved from destruction.
+This Ember mixin is a Get Out of Jail Free Card that injects a 'beforeDestroy' hook and 'pardon'/'unpardon' methods which allow for the halt or continuation of an object's destruction.
