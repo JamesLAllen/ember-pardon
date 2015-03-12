@@ -28,7 +28,7 @@ export default ExampleView;
 ... or reopen classes, say to add to all Views:
 
 ```js
-import EmberPardon from 'mixins/ember_pardon';
+import EmberPardon from '../mixins/ember_pardon';
 
 Ember.View.reopen(EmberPardon);
 ```
