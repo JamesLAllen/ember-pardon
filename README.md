@@ -1,27 +1,81 @@
-# Ember Pardon
+Ember Pardon
+===========
 
-## About ##
+## About
 
 This Ember mixin is a Get Out of Jail Free Card that injects a 'beforeDestroy' hook and 'pardon'/'unpardon' methods which allow for the halt or continuation of an object's destruction.
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+* `npm install --save-dev ember-pardon`
 
-## Running
+## Usage
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+### As a Mixin or Globally
+Ember Pardon can be added to any destroyable Ember Object.  It can be added as a mixin:
 
-## Running Tests
+```js
+import Ember from 'ember';
+import EmberPardon from 'mixins/ember_pardon';
 
-* `ember test`
-* `ember test --server`
+// Only add to a specific class as a mixin
+var ExampleView = Ember.View.extend(EmberPardon, {
+	// ...
+});
+export default ExampleView;
+```
 
-## Building
+... or reopen classes, say to add to all Views:
 
-* `ember build`
+```js
+import EmberPardon from 'mixins/ember_pardon';
+
+Ember.View.reopen(EmberPardon);
+```
+
+### Get Out of Jail Free
+
+Ember Pardon gives your objects freedom once each cycle.  It adds the following:
+
+#### `beforeDestroy`
+Hook that you can override.
+
+#### `pardon()`
+Retains the object from destruction during this one cycle.
+
+#### `unpardon()`
+Reverts the object to default behavior, allowing it to be destroyed.
+
+#### `_isPardoned` : Private
+
+Private variable that tracks whether or not the object should be pardoned.
+
+
+### Complete Example
+
+The following creates an example class that pardons the first time `destroy` is called, but will retain original behavior the second time around.
+
+`unpardon()` only exists for those rare times that you want to cancel a previous pardon.  PLEASE NOTE: Pardon and Unpardon are reset after each destroy cycle.
+
+```js
+import Ember from 'ember';
+import EmberPardon from 'mixins/ember_pardon';
+
+
+var ExampleView = Ember.View.extend(EmberPardon, {
+	shouldStickAround:true,
+	beforeDestroy:function(){
+		if (this.shouldStickAround){
+			this.set('shouldStickAround', false);
+			this.pardon();
+			return;
+		}
+
+		this.unpardon();  // this doesn't really do anything, because pardon wasn't changed above, however if the above block didn't return, then unpardon would cancel everything out.
+		
+	}
+});
+export default ExampleView;
+```
 
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
