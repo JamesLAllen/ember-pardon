@@ -37,16 +37,16 @@ Ember.View.reopen(EmberPardon);
 
 Ember Pardon gives your objects freedom once each cycle.  It adds the following:
 
-#### `beforeDestroy`
-Hook that you can override.
+* `beforeDestroy()`
+Called before `willDestroy`.  Overriding this function and calling `this.pardon()` will save the object from being destroyed, which includes being removed from the DOM in the case of a View.
 
-#### `pardon()`
+* `pardon()`
 Retains the object from destruction during this one cycle.
 
-#### `unpardon()`
+* `unpardon()`
 Reverts the object to default behavior, allowing it to be destroyed.
 
-#### `_isPardoned` : Private
+* `_isPardoned` : Private
 
 Private variable that tracks whether or not the object should be pardoned.
 
