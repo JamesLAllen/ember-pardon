@@ -1,7 +1,7 @@
 {
   "name": "ember-pardon",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "This Ember mixin is a Get Out of Jail Free Card that injects a 'beforeDestroy' hook and 'pardon'/'unpardon' methods which allow for the halt or continuation of an object's destruction.",
   "directories": {
     "doc": "doc",
     "test": "tests"
