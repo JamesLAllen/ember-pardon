@@ -70,8 +70,13 @@ var ExampleView = Ember.View.extend(EmberPardon, {
 			this.pardon();
 			return;
 		}
-
-		this.unpardon();  // this doesn't really do anything, because pardon wasn't changed above, however if the above block didn't return, then unpardon would cancel everything out.
+		
+		/**
+		unpardon used here doesn't really do anything
+		because nothing was changed above.  Use this
+		to cancel out previous calls to pardon().
+		**/
+		this.unpardon();
 		
 	}
 });
