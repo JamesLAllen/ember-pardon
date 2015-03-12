@@ -16,7 +16,7 @@ Ember Pardon can be added to any destroyable Ember Object.  It can be added as a
 
 ```js
 import Ember from 'ember';
-import EmberPardon from 'mixins/ember_pardon';
+import EmberPardon from '../mixins/ember_pardon';
 
 // Only add to a specific class as a mixin
 var ExampleView = Ember.View.extend(EmberPardon, {
