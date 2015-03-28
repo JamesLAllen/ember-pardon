@@ -16,7 +16,7 @@ Ember Pardon can be added to any destroyable Ember Object.  It can be added as a
 
 ```js
 import Ember from 'ember';
-import EmberPardon from 'mixins/ember_pardon';
+import EmberPardon from '../mixins/ember_pardon';
 
 // Only add to a specific class as a mixin
 var ExampleView = Ember.View.extend(EmberPardon, {
@@ -28,7 +28,7 @@ export default ExampleView;
 ... or reopen classes, say to add to all Views:
 
 ```js
-import EmberPardon from 'mixins/ember_pardon';
+import EmberPardon from '../mixins/ember_pardon';
 
 Ember.View.reopen(EmberPardon);
 ```
@@ -70,8 +70,13 @@ var ExampleView = Ember.View.extend(EmberPardon, {
 			this.pardon();
 			return;
 		}
-
-		this.unpardon();  // this doesn't really do anything, because pardon wasn't changed above, however if the above block didn't return, then unpardon would cancel everything out.
+		
+		/**
+		unpardon used here doesn't really do anything
+		because nothing was changed above.  Use this
+		to cancel out previous calls to pardon().
+		**/
+		this.unpardon();
 		
 	}
 });
