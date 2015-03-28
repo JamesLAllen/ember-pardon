@@ -1,3 +1,7 @@
-<h2 id="title">EmberPardon</h2>
-
-{{outlet}}
+<h2 id="title">Welcome to Ember.js</h2>
+<button {{action 'addItem'}}>Add Item</button>
+<ul>
+{{#each item in items}}
+	{{pardon-card title=item action='destroyItem'}}
+{{/each}}
+</ul>
