@@ -1,9 +1,9 @@
 import Ember from 'ember';
+import EmberPardon from 'ember-pardon';
+
+Ember.View.reopen(EmberPardon);
 
 export default Ember.Component.extend({
-	handleIsPardonedChange:function(){
-		console.log('ISPARDONED CHANGED = ', this.get('isPardoned'));
-	}.observes('isPardoned'),
 	actions:{
 		destroyItem:function(){
 			this.sendAction('action', this);
