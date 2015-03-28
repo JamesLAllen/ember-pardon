@@ -10,16 +10,22 @@ This Ember mixin is a Get Out of Jail Free Card that injects a 'beforeDestroy' h
 * `npm install --save-dev ember-pardon`
 
 ## Usage
-Ember Pardon can be used on any destroyable Ember.Object.
 
 ```js
 import Ember from 'ember';
 import EmberPardon from 'ember-pardon';
 
+// as a mixin:
+var NewObject = Ember.Object.extend(EmberPardon,{
+// ...
+});
+
+// or add to the original class:
+
 Ember.View.reopen(EmberPardon);
 ```
 
-Please Note:  For Ember.View it is recommended to add globally, because of how Ember organizes and manages virtual parent views.  It is definitely possible to add as a mixin only, but keep in mind that Ember will attempt to destroy the parent view first, before Ember Pardon has a chance to halt destruction.
+Please Note:  For Ember.View it is recommended to reopen the class because of how Ember organizes and manages virtual parent views.  It is definitely possible to add as a mixin only, but keep in mind that Ember will destroy the view's virtual parent first.  Ember Pardon checks its parent to see if it is virtual, and then checks to see if it can be pardoned.  If so, then it pardons the parent, allowing the natural Ember view order to be maintained.  Unpardoning the child does the inverse, and will attempt to unpardon the parent as well, but only if the parent is virtual.
 
 
 ### Get Out of Jail Free
