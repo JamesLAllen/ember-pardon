@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 var EmberPardon = Ember.Mixin.create({
-	beforeDestroy: Ember.K,
+	beforeDestroy() {},
 	isPardoned:false,
 	_isPardoned:false,
 	_pardonedChildren:Ember.A(),
